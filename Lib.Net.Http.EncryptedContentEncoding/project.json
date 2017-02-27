@@ -1,0 +1,33 @@
+﻿{
+  "title": "Lib.Net.Http.EncryptedContentEncoding",
+  "version": "0.7.0-*",
+  "description": "Lib.Net.Http.EncryptedContentEncoding is a library which adds Encrypted Content-Encoding (aes128gcm) support to HttpClient",
+  "authors": [ "Tomasz Pęczek" ],
+  "copyright": "Copyright © 2017 Tomasz Pęczek",
+  "packOptions": {
+    "tags": [ "aes128gcm", "httpclient", "http", "encryption" ],
+    "projectUrl": "https://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding",
+    "licenseUrl": "https://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding/blob/master/LICENSE.md",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding"
+    }
+  },
+  "buildOptions": {
+    "xmlDoc": false
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "BouncyCastle.CoreClr": "1.0.0"
+  },
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
+  }
+}
