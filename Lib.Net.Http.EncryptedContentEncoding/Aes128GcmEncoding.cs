@@ -107,6 +107,18 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
             await EncryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey);
         }
+
+        public static async Task DecodeAsync(Stream source, Stream destination, Func<string, byte[]> keyLocator)
+        {
+            ValidateDecodeParameters(source, destination, keyLocator);
+
+            CodingHeader codingHeader = await ReadCodingHeaderAsync(source);
+
+            byte[] pseudorandomKey = HmacSha256(codingHeader.Salt, keyLocator(codingHeader.KeyId));
+            byte[] contentEncryptionKey = GetContentEncryptionKey(pseudorandomKey);
+
+            await DecryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey);
+        }
         #endregion
 
         #region General Private Methods
@@ -327,6 +339,155 @@ namespace Lib.Net.Http.EncryptedContentEncoding
                 await destination.WriteAsync(cipherText, 0, cipherText.Length);
             }
             while (plainText[plainText.Length - 1] != LAST_RECORD_DELIMITER);
+        }
+        #endregion
+
+        #region Decode Private Methods
+        private static void ValidateDecodeParameters(Stream source, Stream destination, Func<string, byte[]> keyLocator)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
+
+            if (keyLocator == null)
+            {
+                throw new ArgumentNullException(nameof(keyLocator));
+            }
+        }
+
+        private static void ThrowInvalidCodingHeaderException()
+        {
+            throw new FormatException("Invalid coding header.");
+        }
+
+        private static void ThrowInvalidOrderOrMissingRecordException()
+        {
+            throw new FormatException("Invalid records order or missing record(s).");
+        }
+
+        private static async Task<byte[]> ReadCodingHeaderBytesAsync(Stream source, int count)
+        {
+            byte[] bytes = new byte[count];
+            int bytesRead = await source.ReadAsync(bytes, 0, count);
+            if (bytesRead != count)
+            {
+                ThrowInvalidCodingHeaderException();
+            }
+
+            return bytes;
+        }
+
+        private static async Task<int> ReadRecordSizeAsync(Stream source)
+        {
+            byte[] recordSizeBytes = await ReadCodingHeaderBytesAsync(source, RECORD_SIZE_LENGTH);
+
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(recordSizeBytes);
+            }
+            uint recordSize = BitConverter.ToUInt32(recordSizeBytes, 0);
+
+            if (recordSize > Int32.MaxValue)
+            {
+                throw new NotSupportedException($"This implementation doesn't support record size larger than {Int32.MaxValue}.");
+            }
+
+            return (int)recordSize;
+        }
+
+        private static async Task<string> ReadKeyId(Stream source)
+        {
+            string keyId = null;
+
+            int keyIdLength = source.ReadByte();
+
+            if (keyIdLength == -1)
+            {
+                ThrowInvalidCodingHeaderException();
+            }
+        
+            if (keyIdLength > 0)
+            {
+                byte[] keyIdBytes = await ReadCodingHeaderBytesAsync(source, keyIdLength);
+                keyId = Encoding.UTF8.GetString(keyIdBytes);
+            }
+
+            return keyId;
+        }
+
+        private static async Task<CodingHeader> ReadCodingHeaderAsync(Stream source)
+        {
+            return new CodingHeader
+            {
+                Salt = await ReadCodingHeaderBytesAsync(source, SALT_LENGTH),
+                RecordSize = await ReadRecordSizeAsync(source),
+                KeyId = await ReadKeyId(source)
+            };
+        }
+
+        private static int GetRecordDelimiterIndex(byte[] plainText, int recordDataSize)
+        {
+            int recordDelimiterIndex = -1;
+            for (int plaintTextIndex = plainText.Length - 1; plaintTextIndex >= 0; plaintTextIndex--)
+            {
+                if (plainText[plaintTextIndex] == 0)
+                {
+                    continue;
+                }
+
+                if ((plainText[plaintTextIndex] == RECORD_DELIMITER) || (plainText[plaintTextIndex] == LAST_RECORD_DELIMITER))
+                {
+                    recordDelimiterIndex = plaintTextIndex;
+                }
+
+                break;
+            }
+
+            if ((recordDelimiterIndex == -1) || ((plainText[recordDelimiterIndex] == RECORD_DELIMITER) && ((plainText.Length -1) != recordDataSize)))
+            {
+                throw new FormatException("Invalid record delimiter.");
+            }
+
+            return recordDelimiterIndex;
+        }
+
+        private static async Task DecryptContentAsync(Stream source, Stream destination, int recordSize, byte[] pseudorandomKey, byte[] contentEncryptionKey)
+        {
+            GcmBlockCipher aes128GcmCipher = new GcmBlockCipher(new AesFastEngine());
+
+            ulong recordSequenceNumber = 0;
+
+            byte[] cipherText = new byte[recordSize];
+            byte[] plainText = null;
+            int recordDataSize = recordSize - RECORD_OVERHEAD_SIZE;
+            int recordDelimiterIndex = 0;
+
+            do
+            {
+                int cipherTextLength = await source.ReadAsync(cipherText, 0, cipherText.Length);
+                if (cipherTextLength == 0)
+                {
+                    ThrowInvalidOrderOrMissingRecordException();
+                }
+
+                ConfigureAes128GcmCipher(aes128GcmCipher, false, pseudorandomKey, contentEncryptionKey, recordSequenceNumber++);
+                plainText = Aes128GcmCipherProcessBytes(aes128GcmCipher, cipherText, cipherTextLength);
+                recordDelimiterIndex = GetRecordDelimiterIndex(plainText, recordDataSize);
+
+                if ((plainText[recordDelimiterIndex] == LAST_RECORD_DELIMITER) && (source.ReadByte() != -1))
+                {
+                    ThrowInvalidOrderOrMissingRecordException();
+                }
+
+                await destination.WriteAsync(plainText, 0, recordDelimiterIndex);
+            }
+            while (plainText[recordDelimiterIndex] != LAST_RECORD_DELIMITER);
         }
         #endregion
     }
