@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Lib.Net.Http.EncryptedContentEncoding is a library which adds Encrypted Content-Encoding (aes128gcm) support to HttpClient</Description>
+    <Copyright>Copyright © 2017 Tomasz Pęczek</Copyright>
+    <VersionPrefix>0.8.0</VersionPrefix>
+    <Authors>Tomasz Pęczek</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <!--<TargetFramework>net451</TargetFramework>-->
+    <AssemblyTitle>Lib.Net.Http.EncryptedContentEncoding</AssemblyTitle>
+    <AssemblyName>Lib.Net.Http.EncryptedContentEncoding</AssemblyName>
+    <PackageId>Lib.Net.Http.EncryptedContentEncoding</PackageId>
+    <PackageTags>aes128gcm;httpclient;http;encryption</PackageTags>
+    <PackageProjectUrl>https://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding/blob/master/LICENSE.md</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateAssemblyTitleAttribute>true</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>true</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyProductAttribute>true</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>true</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.CoreClr" Version="1.0.0" />
+    <!--<PackageReference Include="BouncyCastle" Version="1.8.1" />-->
+    <PackageReference Include="System.Net.Http" Version="4.3.1" />
+  </ItemGroup>
+  <Target Name="PostcompileScript" AfterTargets="Build">
+    <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
+  </Target>
+</Project>
