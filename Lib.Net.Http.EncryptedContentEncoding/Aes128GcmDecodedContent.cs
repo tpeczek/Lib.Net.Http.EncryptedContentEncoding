@@ -7,6 +7,9 @@ using Lib.Net.Http.EncryptedContentEncoding.Internals;
 
 namespace Lib.Net.Http.EncryptedContentEncoding
 {
+    /// <summary>
+    /// A class representing an HTTP entity body decoded with aes128gcm encoding.
+    /// </summary>
     public sealed class Aes128GcmDecodedContent : HttpContent
     {
         #region Fields
@@ -15,6 +18,11 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Instantiates a new <see cref="Aes128GcmDecodedContent"/>.
+        /// </summary>
+        /// <param name="contentToBeDecrypted">The content which will be decoded.</param>
+        /// <param name="keyLocator">The function which is able to locate the keying material based on the keying material identificator.</param>
         public Aes128GcmDecodedContent(HttpContent contentToBeDecrypted, Func<string, byte[]> keyLocator)
         {
             _contentToBeDecrypted = contentToBeDecrypted;
@@ -23,6 +31,12 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Serialize the HTTP content to a stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="stream">The target stream.</param>
+        /// <param name="context">Information about the transport (channel binding token, for example). This parameter may be null.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
             if (!_contentToBeDecrypted.Headers.ContentEncoding.Contains(Constants.ENCRYPTED_CONTENT_ENCODING))
@@ -35,6 +49,11 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             await Aes128GcmEncoding.DecodeAsync(streamToBeDecrypted, stream, _keyLocator);
         }
 
+        /// <summary>
+        /// Determines whether the HTTP content has a valid length in bytes.
+        /// </summary>
+        /// <param name="length">The length in bytes of the HTTP content.</param>
+        /// <returns>True if length is a valid length, otherwise false.</returns>
         protected override bool TryComputeLength(out long length)
         {
             length = 0;

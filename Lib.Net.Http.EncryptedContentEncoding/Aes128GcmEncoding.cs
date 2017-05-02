@@ -10,6 +10,9 @@ using System.Security.Cryptography;
 
 namespace Lib.Net.Http.EncryptedContentEncoding
 {
+    /// <summary>
+    /// Provides aes128gcm encoding and decoding routines.
+    /// </summary>
     public static class Aes128GcmEncoding
     {
         #region Classes
@@ -68,26 +71,68 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="key">The keying material.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public static Task EncodeAsync(Stream source, Stream destination, byte[] key)
         {
             return EncodeAsync(source, destination, null, key, null, DEFAULT_RECORD_SIZE);
         }
 
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public static Task EncodeAsync(Stream source, Stream destination, byte[] key, string keyId)
         {
             return EncodeAsync(source, destination, null, key, keyId, DEFAULT_RECORD_SIZE);
         }
 
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="key">The keying material.</param>
+        /// <param name="recordSize">The record size in octets.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public static Task EncodeAsync(Stream source, Stream destination, byte[] key, int recordSize)
         {
             return EncodeAsync(source, destination, null, key, null, recordSize);
         }
 
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        /// <param name="recordSize">The record size in octets.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public static Task EncodeAsync(Stream source, Stream destination, byte[] key, string keyId, int recordSize)
         {
             return EncodeAsync(source, destination, null, key, keyId, recordSize);
         }
 
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="salt">The salt.</param>
+        /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        /// <param name="recordSize">The record size in octets.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public static async Task EncodeAsync(Stream source, Stream destination, byte[] salt, byte[] key, string keyId, int recordSize)
         {
             ValidateEncodeParameters(source, destination, key, recordSize);
@@ -108,6 +153,13 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             await EncryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey);
         }
 
+        /// <summary>
+        /// Decodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="keyLocator">The function which is able to locate the keying material based on the keying material identificator.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public static async Task DecodeAsync(Stream source, Stream destination, Func<string, byte[]> keyLocator)
         {
             ValidateDecodeParameters(source, destination, keyLocator);

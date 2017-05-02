@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Lib.Net.Http.EncryptedContentEncoding is a library which adds Encrypted Content-Encoding (aes128gcm) support to HttpClient</Description>
     <Copyright>Copyright © 2017 Tomasz Pęczek</Copyright>
-    <VersionPrefix>0.8.0</VersionPrefix>
+    <VersionPrefix>1.0.0</VersionPrefix>
     <Authors>Tomasz Pęczek</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <!--<TargetFramework>net451</TargetFramework>-->
@@ -23,8 +23,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BouncyCastle.CoreClr" Version="1.0.0" />
-    <!--<PackageReference Include="BouncyCastle" Version="1.8.1" />-->
-    <PackageReference Include="System.Net.Http" Version="4.3.1" />
+    <!--<PackageReference Include="BouncyCastle" Version="1.8.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.1" />-->
   </ItemGroup>
   <Target Name="PostcompileScript" AfterTargets="Build">
     <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
