@@ -38,7 +38,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         {
             request.Headers.AcceptEncoding.Add(new StringWithQualityHeaderValue(Constants.ENCRYPTED_CONTENT_ENCODING));
 
-            HttpResponseMessage response = await base.SendAsync(request, cancellationToken);
+            HttpResponseMessage response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
             if (response.Content.Headers.ContentEncoding.Contains(Constants.ENCRYPTED_CONTENT_ENCODING))
             {

@@ -79,9 +79,9 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// <returns>The task object representing the asynchronous operation.</returns>
         protected override async Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            Stream streamToBeEncrypted = await _contentToBeEncrypted.ReadAsStreamAsync();
+            Stream streamToBeEncrypted = await _contentToBeEncrypted.ReadAsStreamAsync().ConfigureAwait(false);
 
-            await Aes128GcmEncoding.EncodeAsync(streamToBeEncrypted, stream, _key, _keyId, _recordSize);
+            await Aes128GcmEncoding.EncodeAsync(streamToBeEncrypted, stream, _key, _keyId, _recordSize).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -44,9 +44,9 @@ namespace Lib.Net.Http.EncryptedContentEncoding
                 throw new NotSupportedException($"Encryption type not supported or stream isn't encrypted. The only sypported encryption type is '{Constants.ENCRYPTED_CONTENT_ENCODING}'.");
             }
 
-            Stream streamToBeDecrypted = await _contentToBeDecrypted.ReadAsStreamAsync();
+            Stream streamToBeDecrypted = await _contentToBeDecrypted.ReadAsStreamAsync().ConfigureAwait(false);
 
-            await Aes128GcmEncoding.DecodeAsync(streamToBeDecrypted, stream, _keyLocator);
+            await Aes128GcmEncoding.DecodeAsync(streamToBeDecrypted, stream, _keyLocator).ConfigureAwait(false);
         }
 
         /// <summary>

@@ -148,9 +148,9 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             byte[] pseudorandomKey = HmacSha256(codingHeader.Salt, key);
             byte[] contentEncryptionKey = GetContentEncryptionKey(pseudorandomKey);
 
-            await WriteCodingHeaderAsync(destination, codingHeader);
+            await WriteCodingHeaderAsync(destination, codingHeader).ConfigureAwait(false);
 
-            await EncryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey);
+            await EncryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -164,12 +164,12 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         {
             ValidateDecodeParameters(source, destination, keyLocator);
 
-            CodingHeader codingHeader = await ReadCodingHeaderAsync(source);
+            CodingHeader codingHeader = await ReadCodingHeaderAsync(source).ConfigureAwait(false);
 
             byte[] pseudorandomKey = HmacSha256(codingHeader.Salt, keyLocator(codingHeader.KeyId));
             byte[] contentEncryptionKey = GetContentEncryptionKey(pseudorandomKey);
 
-            await DecryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey);
+            await DecryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey).ConfigureAwait(false);
         }
         #endregion
 
@@ -331,7 +331,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             codingHeaderBytes[KEY_ID_LEN_INDEX] = (byte)keyIdBytes.Length;
             keyIdBytes.CopyTo(codingHeaderBytes, KEY_ID_INDEX);
 
-            await destination.WriteAsync(codingHeaderBytes, 0, codingHeaderBytes.Length);
+            await destination.WriteAsync(codingHeaderBytes, 0, codingHeaderBytes.Length).ConfigureAwait(false);
         }
 
         private static async Task<byte[]> GetPlainTextAsync(Stream source, int recordDataSize, byte? peekedByte)
@@ -342,11 +342,11 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             if (peekedByte.HasValue)
             {
                 plainText[0] = peekedByte.Value;
-                readDataSize = (await source.ReadAsync(plainText, 1, recordDataSize - 1)) + 1;
+                readDataSize = (await source.ReadAsync(plainText, 1, recordDataSize - 1).ConfigureAwait(false)) + 1;
             }
             else
             {
-                readDataSize = await source.ReadAsync(plainText, 0, recordDataSize);
+                readDataSize = await source.ReadAsync(plainText, 0, recordDataSize).ConfigureAwait(false);
             }
 
             if (readDataSize == recordDataSize)
@@ -374,7 +374,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
             do
             {
-                plainText = await GetPlainTextAsync(source, recordDataSize, (byte?)peekedByte);
+                plainText = await GetPlainTextAsync(source, recordDataSize, (byte?)peekedByte).ConfigureAwait(false);
 
                 if (plainText[plainText.Length - 1] != 2)
                 {
@@ -388,7 +388,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
                 ConfigureAes128GcmCipher(aes128GcmCipher, true, pseudorandomKey, contentEncryptionKey, recordSequenceNumber++);
                 byte[] cipherText = Aes128GcmCipherProcessBytes(aes128GcmCipher, plainText, plainText.Length);
 
-                await destination.WriteAsync(cipherText, 0, cipherText.Length);
+                await destination.WriteAsync(cipherText, 0, cipherText.Length).ConfigureAwait(false);
             }
             while (plainText[plainText.Length - 1] != LAST_RECORD_DELIMITER);
         }
@@ -426,7 +426,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         private static async Task<byte[]> ReadCodingHeaderBytesAsync(Stream source, int count)
         {
             byte[] bytes = new byte[count];
-            int bytesRead = await source.ReadAsync(bytes, 0, count);
+            int bytesRead = await source.ReadAsync(bytes, 0, count).ConfigureAwait(false);
             if (bytesRead != count)
             {
                 ThrowInvalidCodingHeaderException();
@@ -437,7 +437,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
         private static async Task<int> ReadRecordSizeAsync(Stream source)
         {
-            byte[] recordSizeBytes = await ReadCodingHeaderBytesAsync(source, RECORD_SIZE_LENGTH);
+            byte[] recordSizeBytes = await ReadCodingHeaderBytesAsync(source, RECORD_SIZE_LENGTH).ConfigureAwait(false);
 
             if (BitConverter.IsLittleEndian)
             {
@@ -466,7 +466,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         
             if (keyIdLength > 0)
             {
-                byte[] keyIdBytes = await ReadCodingHeaderBytesAsync(source, keyIdLength);
+                byte[] keyIdBytes = await ReadCodingHeaderBytesAsync(source, keyIdLength).ConfigureAwait(false);
                 keyId = Encoding.UTF8.GetString(keyIdBytes);
             }
 
@@ -477,9 +477,9 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         {
             return new CodingHeader
             {
-                Salt = await ReadCodingHeaderBytesAsync(source, SALT_LENGTH),
-                RecordSize = await ReadRecordSizeAsync(source),
-                KeyId = await ReadKeyId(source)
+                Salt = await ReadCodingHeaderBytesAsync(source, SALT_LENGTH).ConfigureAwait(false),
+                RecordSize = await ReadRecordSizeAsync(source).ConfigureAwait(false),
+                KeyId = await ReadKeyId(source).ConfigureAwait(false)
             };
         }
 
@@ -522,7 +522,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
             do
             {
-                int cipherTextLength = await source.ReadAsync(cipherText, 0, cipherText.Length);
+                int cipherTextLength = await source.ReadAsync(cipherText, 0, cipherText.Length).ConfigureAwait(false);
                 if (cipherTextLength == 0)
                 {
                     ThrowInvalidOrderOrMissingRecordException();
@@ -537,7 +537,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
                     ThrowInvalidOrderOrMissingRecordException();
                 }
 
-                await destination.WriteAsync(plainText, 0, recordDelimiterIndex);
+                await destination.WriteAsync(plainText, 0, recordDelimiterIndex).ConfigureAwait(false);
             }
             while (plainText[recordDelimiterIndex] != LAST_RECORD_DELIMITER);
         }
