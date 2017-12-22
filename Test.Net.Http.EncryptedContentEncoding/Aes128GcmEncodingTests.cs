@@ -42,7 +42,7 @@ namespace Test.Net.Http.EncryptedContentEncoding
             {
                 using (MemoryStream destination = new MemoryStream())
                 {
-                    await Aes128GcmEncoding.EncodeAsync(source, destination, salt, KEYS[DEFAULT_KEY_ID], null, RECORD_SIZE_4096);
+                    await Aes128GcmEncoding.EncodeAsync(source, destination, salt, KEYS[DEFAULT_KEY_ID], (byte[])null, RECORD_SIZE_4096);
 
                     encodedContent = Convert.ToBase64String(destination.ToArray());
                 }

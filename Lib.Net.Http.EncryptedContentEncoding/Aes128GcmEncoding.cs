@@ -2,11 +2,11 @@
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
-using System.Security.Cryptography;
 
 namespace Lib.Net.Http.EncryptedContentEncoding
 {
@@ -15,20 +15,25 @@ namespace Lib.Net.Http.EncryptedContentEncoding
     /// </summary>
     public static class Aes128GcmEncoding
     {
-        #region Classes
-        private class CodingHeader
+        #region Structs
+        private readonly struct CodingHeader
         {
-            public byte[] Salt { get; set; }
+            public byte[] Salt { get; }
 
-            public int RecordSize { get; set; }
+            public int RecordSize { get; }
 
-            public string KeyId { get; set; }
+            public byte[] KeyId { get; }
+
+            public CodingHeader(byte[] salt, int recordSize, byte[] keyId)
+            {
+                Salt = salt;
+                RecordSize = recordSize;
+                KeyId = keyId;
+            }
         }
         #endregion
 
         #region Fields
-        private const int KEY_LENGTH = 16;
-
         private const int SALT_INDEX = 0;
         private const int SALT_LENGTH = 16;
 
@@ -54,6 +59,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         private const string NONCE_INFO_PARAMETER_STRING = "Content-Encoding: nonce";
         private const int NONCE_LENGTH = 12;
 
+        private static readonly byte[] _emptyKeyId = new byte[0];
         private static readonly byte[] _contentEncryptionKeyInfoParameter;
         private static readonly byte[] _nonceInfoParameter;
         private static readonly SecureRandom _secureRandom = new SecureRandom();
@@ -80,7 +86,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// <returns>The task object representing the asynchronous operation.</returns>
         public static Task EncodeAsync(Stream source, Stream destination, byte[] key)
         {
-            return EncodeAsync(source, destination, null, key, null, DEFAULT_RECORD_SIZE);
+            return EncodeAsync(source, destination, null, key, (byte[])null, DEFAULT_RECORD_SIZE);
         }
 
         /// <summary>
@@ -102,11 +108,24 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// <param name="source">The source stream.</param>
         /// <param name="destination">The destionation stream.</param>
         /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public static Task EncodeAsync(Stream source, Stream destination, byte[] key, byte[] keyId)
+        {
+            return EncodeAsync(source, destination, null, key, keyId, DEFAULT_RECORD_SIZE);
+        }
+
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="key">The keying material.</param>
         /// <param name="recordSize">The record size in octets.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         public static Task EncodeAsync(Stream source, Stream destination, byte[] key, int recordSize)
         {
-            return EncodeAsync(source, destination, null, key, null, recordSize);
+            return EncodeAsync(source, destination, null, key, (byte[])null, recordSize);
         }
 
         /// <summary>
@@ -128,21 +147,47 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// </summary>
         /// <param name="source">The source stream.</param>
         /// <param name="destination">The destionation stream.</param>
+        /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        /// <param name="recordSize">The record size in octets.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public static Task EncodeAsync(Stream source, Stream destination, byte[] key, byte[] keyId, int recordSize)
+        {
+            return EncodeAsync(source, destination, null, key, keyId, recordSize);
+        }
+
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
         /// <param name="salt">The salt.</param>
         /// <param name="key">The keying material.</param>
         /// <param name="keyId">The keying material identificator.</param>
         /// <param name="recordSize">The record size in octets.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public static async Task EncodeAsync(Stream source, Stream destination, byte[] salt, byte[] key, string keyId, int recordSize)
+        public static Task EncodeAsync(Stream source, Stream destination, byte[] salt, byte[] key, string keyId, int recordSize)
         {
-            ValidateEncodeParameters(source, destination, key, recordSize);
+            byte[] keyIdBytes = String.IsNullOrEmpty(keyId) ? new byte[0] : Encoding.UTF8.GetBytes(keyId);
 
-            CodingHeader codingHeader = new CodingHeader
-            {
-                Salt = CoalesceSalt(salt),
-                RecordSize = recordSize,
-                KeyId = keyId
-            };
+            return EncodeAsync(source, destination, salt, key, keyIdBytes, recordSize);
+        }
+
+        /// <summary>
+        /// Encodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="salt">The salt.</param>
+        /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        /// <param name="recordSize">The record size in octets.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public static async Task EncodeAsync(Stream source, Stream destination, byte[] salt, byte[] key, byte[] keyId, int recordSize)
+        {
+            ValidateEncodeParameters(source, destination, key, keyId, recordSize);
+
+            CodingHeader codingHeader = new CodingHeader(CoalesceSalt(salt), recordSize, keyId ?? _emptyKeyId);
 
             // PRK = HMAC-SHA-256(salt, IKM)
             byte[] pseudorandomKey = HmacSha256(codingHeader.Salt, key);
@@ -158,18 +203,35 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// </summary>
         /// <param name="source">The source stream.</param>
         /// <param name="destination">The destionation stream.</param>
-        /// <param name="keyLocator">The function which is able to locate the keying material based on the keying material identificator.</param>
+        /// <param name="keyProvider">The function which is able to provide the keying material based on the keying material identificator.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public static async Task DecodeAsync(Stream source, Stream destination, Func<string, byte[]> keyLocator)
+        public static Task DecodeAsync(Stream source, Stream destination, Func<string, byte[]> keyProvider)
         {
-            ValidateDecodeParameters(source, destination, keyLocator);
+            return DecodeAsync(source, destination, ConvertToByteArrayBasedKeyProvider(keyProvider));
+        }
+
+        /// <summary>
+        /// Decodes source stream into destionation stream as an asynchronous operation.
+        /// </summary>
+        /// <param name="source">The source stream.</param>
+        /// <param name="destination">The destionation stream.</param>
+        /// <param name="keyProvider">The function which is able to provide the keying material based on the keying material identificator.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        public static async Task DecodeAsync(Stream source, Stream destination, Func<byte[], byte[]> keyProvider)
+        {
+            ValidateDecodeParameters(source, destination, keyProvider);
 
             CodingHeader codingHeader = await ReadCodingHeaderAsync(source).ConfigureAwait(false);
 
-            byte[] pseudorandomKey = HmacSha256(codingHeader.Salt, keyLocator(codingHeader.KeyId));
+            byte[] pseudorandomKey = HmacSha256(codingHeader.Salt, keyProvider(codingHeader.KeyId));
             byte[] contentEncryptionKey = GetContentEncryptionKey(pseudorandomKey);
 
             await DecryptContentAsync(source, destination, codingHeader.RecordSize, pseudorandomKey, contentEncryptionKey).ConfigureAwait(false);
+        }
+
+        internal static Func<byte[], byte[]> ConvertToByteArrayBasedKeyProvider(Func<string, byte[]> stringBasedKeyProvider)
+        {
+            return (byte[] keyId) => stringBasedKeyProvider((keyId == null) ? null : Encoding.UTF8.GetString(keyId));
         }
         #endregion
 
@@ -250,7 +312,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         #endregion
 
         #region Encode Private Methods
-        private static void ValidateEncodeParameters(Stream source, Stream destination, byte[] key, int recordSize)
+        private static void ValidateEncodeParameters(Stream source, Stream destination, byte[] key, byte[] keyId, int recordSize)
         {
             if (source == null)
             {
@@ -267,9 +329,9 @@ namespace Lib.Net.Http.EncryptedContentEncoding
                 throw new ArgumentNullException(nameof(key));
             }
 
-            if (key.Length != KEY_LENGTH)
+            if ((keyId != null) && (keyId.Length > Byte.MaxValue))
             {
-                throw new ArgumentException($" The '{nameof(key)}' parameter must be {KEY_LENGTH} octets long.", nameof(key));
+                throw new ArgumentException($"The '{nameof(keyId)}' parameter is too long.", nameof(keyId));
             }
 
             if (recordSize < MIN_RECORD_SIZE)
@@ -293,17 +355,6 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             return salt;
         }
 
-        private static byte[] GetKeyIdBytes(string keyId)
-        {
-            byte[] keyIdBytes = String.IsNullOrEmpty(keyId) ? new byte[0] : Encoding.UTF8.GetBytes(keyId);
-            if (keyIdBytes.Length > Byte.MaxValue)
-            {
-                throw new ArgumentException($"The '{nameof(keyId)}' parameter is too long.", nameof(keyId));
-            }
-
-            return keyIdBytes;
-        }
-
         private static byte[] GetRecordSizeBytes(int recordSize)
         {
             byte[] recordSizeBytes = BitConverter.GetBytes(recordSize);
@@ -321,15 +372,14 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             //| SALT(16) | RECORDSIZE(4) | KEYIDLEN(1) | KEYID(KEYIDLEN) |
             //+----------+---------------+-------------+-----------------+
 
-            byte[] keyIdBytes = GetKeyIdBytes(codingHeader.KeyId);
             byte[] recordSizeBytes = GetRecordSizeBytes(codingHeader.RecordSize);
 
-            byte[] codingHeaderBytes = new byte[SALT_LENGTH + RECORD_SIZE_LENGTH + KEY_ID_LEN_LENGTH + keyIdBytes.Length];
+            byte[] codingHeaderBytes = new byte[SALT_LENGTH + RECORD_SIZE_LENGTH + KEY_ID_LEN_LENGTH + codingHeader.KeyId.Length];
 
             codingHeader.Salt.CopyTo(codingHeaderBytes, SALT_INDEX);
             recordSizeBytes.CopyTo(codingHeaderBytes, RECORD_SIZE_INDEX);
-            codingHeaderBytes[KEY_ID_LEN_INDEX] = (byte)keyIdBytes.Length;
-            keyIdBytes.CopyTo(codingHeaderBytes, KEY_ID_INDEX);
+            codingHeaderBytes[KEY_ID_LEN_INDEX] = (byte)codingHeader.KeyId.Length;
+            codingHeader.KeyId.CopyTo(codingHeaderBytes, KEY_ID_INDEX);
 
             await destination.WriteAsync(codingHeaderBytes, 0, codingHeaderBytes.Length).ConfigureAwait(false);
         }
@@ -395,7 +445,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         #endregion
 
         #region Decode Private Methods
-        private static void ValidateDecodeParameters(Stream source, Stream destination, Func<string, byte[]> keyLocator)
+        private static void ValidateDecodeParameters(Stream source, Stream destination, Func<byte[], byte[]> keyProvider)
         {
             if (source == null)
             {
@@ -407,9 +457,9 @@ namespace Lib.Net.Http.EncryptedContentEncoding
                 throw new ArgumentNullException(nameof(destination));
             }
 
-            if (keyLocator == null)
+            if (keyProvider == null)
             {
-                throw new ArgumentNullException(nameof(keyLocator));
+                throw new ArgumentNullException(nameof(keyProvider));
             }
         }
 
@@ -453,9 +503,9 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             return (int)recordSize;
         }
 
-        private static async Task<string> ReadKeyId(Stream source)
+        private static async Task<byte[]> ReadKeyId(Stream source)
         {
-            string keyId = null;
+            byte[] keyId = null;
 
             int keyIdLength = source.ReadByte();
 
@@ -466,8 +516,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         
             if (keyIdLength > 0)
             {
-                byte[] keyIdBytes = await ReadCodingHeaderBytesAsync(source, keyIdLength).ConfigureAwait(false);
-                keyId = Encoding.UTF8.GetString(keyIdBytes);
+                keyId = await ReadCodingHeaderBytesAsync(source, keyIdLength).ConfigureAwait(false);
             }
 
             return keyId;
@@ -476,11 +525,11 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         private static async Task<CodingHeader> ReadCodingHeaderAsync(Stream source)
         {
             return new CodingHeader
-            {
-                Salt = await ReadCodingHeaderBytesAsync(source, SALT_LENGTH).ConfigureAwait(false),
-                RecordSize = await ReadRecordSizeAsync(source).ConfigureAwait(false),
-                KeyId = await ReadKeyId(source).ConfigureAwait(false)
-            };
+            (
+                await ReadCodingHeaderBytesAsync(source, SALT_LENGTH).ConfigureAwait(false),
+                await ReadRecordSizeAsync(source).ConfigureAwait(false),
+                await ReadKeyId(source).ConfigureAwait(false)
+            );
         }
 
         private static int GetRecordDelimiterIndex(byte[] plainText, int recordDataSize)

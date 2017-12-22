@@ -14,7 +14,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
     {
         #region Fields
         private readonly HttpContent _contentToBeDecrypted;
-        private readonly Func<string, byte[]> _keyLocator;
+        private readonly Func<byte[], byte[]> _keyProvider;
         #endregion
 
         #region Constructors
@@ -22,11 +22,20 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// Instantiates a new <see cref="Aes128GcmDecodedContent"/>.
         /// </summary>
         /// <param name="contentToBeDecrypted">The content which will be decoded.</param>
-        /// <param name="keyLocator">The function which is able to locate the keying material based on the keying material identificator.</param>
-        public Aes128GcmDecodedContent(HttpContent contentToBeDecrypted, Func<string, byte[]> keyLocator)
+        /// <param name="keyProvider">The function which is able to provide the keying material based on the keying material identificator.</param>
+        public Aes128GcmDecodedContent(HttpContent contentToBeDecrypted, Func<string, byte[]> keyProvider)
+            : this(contentToBeDecrypted, Aes128GcmEncoding.ConvertToByteArrayBasedKeyProvider(keyProvider))
+        { }
+
+        /// <summary>
+        /// Instantiates a new <see cref="Aes128GcmDecodedContent"/>.
+        /// </summary>
+        /// <param name="contentToBeDecrypted">The content which will be decoded.</param>
+        /// <param name="keyProvider">The function which is able to provide the keying material based on the keying material identificator.</param>
+        public Aes128GcmDecodedContent(HttpContent contentToBeDecrypted, Func<byte[], byte[]> keyProvider)
         {
             _contentToBeDecrypted = contentToBeDecrypted;
-            _keyLocator = keyLocator;
+            _keyProvider = keyProvider;
         }
         #endregion
 
@@ -46,7 +55,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
             Stream streamToBeDecrypted = await _contentToBeDecrypted.ReadAsStreamAsync().ConfigureAwait(false);
 
-            await Aes128GcmEncoding.DecodeAsync(streamToBeDecrypted, stream, _keyLocator).ConfigureAwait(false);
+            await Aes128GcmEncoding.DecodeAsync(streamToBeDecrypted, stream, _keyProvider).ConfigureAwait(false);
         }
 
         /// <summary>

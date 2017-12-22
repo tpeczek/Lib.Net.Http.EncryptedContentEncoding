@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib.Net.Http.EncryptedContentEncoding", "Lib.Net.Http.EncryptedContentEncoding\Lib.Net.Http.EncryptedContentEncoding.csproj", "{4B49C80B-3394-4DF9-8CDC-DBD385CF1E66}"
 EndProject
@@ -24,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24BD11A8-C730-407D-83DC-625C3A10A4F6}
 	EndGlobalSection
 EndGlobal

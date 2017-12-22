@@ -13,17 +13,25 @@ namespace Lib.Net.Http.EncryptedContentEncoding
     public sealed class Aes128GcmEncodingHandler : DelegatingHandler
     {
         #region Fields
-        private readonly Func<string, byte[]> _keyLocator;
+        private readonly Func<byte[], byte[]> _keyProvider;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Instantiates a new <see cref="Aes128GcmEncodingHandler"/>.
         /// </summary>
-        /// <param name="keyLocator">The function which is able to locate the keying material based on the keying material identificator.</param>
-        public Aes128GcmEncodingHandler(Func<string, byte[]> keyLocator)
+        /// <param name="keyProvider">The function which is able to provide the keying material based on the keying material identificator.</param>
+        public Aes128GcmEncodingHandler(Func<string, byte[]> keyProvider)
+            : this(Aes128GcmEncoding.ConvertToByteArrayBasedKeyProvider(keyProvider))
+        { }
+
+        /// <summary>
+        /// Instantiates a new <see cref="Aes128GcmEncodingHandler"/>.
+        /// </summary>
+        /// <param name="keyProvider">The function which is able to provide the keying material based on the keying material identificator.</param>
+        public Aes128GcmEncodingHandler(Func<byte[], byte[]> keyProvider)
         {
-            _keyLocator = keyLocator;
+            _keyProvider = keyProvider;
         }
         #endregion
 
@@ -42,7 +50,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
             if (response.Content.Headers.ContentEncoding.Contains(Constants.ENCRYPTED_CONTENT_ENCODING))
             {
-                response.Content = new Aes128GcmDecodedContent(response.Content, _keyLocator);
+                response.Content = new Aes128GcmDecodedContent(response.Content, _keyProvider);
             }
 
             return response;

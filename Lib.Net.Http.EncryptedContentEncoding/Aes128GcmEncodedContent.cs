@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -17,7 +18,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
         private readonly HttpContent _contentToBeEncrypted;
         private readonly byte[] _key;
-        private readonly string _keyId;
+        private readonly byte[] _keyId;
         private readonly int _recordSize;
         #endregion
 
@@ -28,7 +29,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// <param name="contentToBeEncrypted">The content which will be encoded.</param>
         /// <param name="key">The keying material.</param>
         public Aes128GcmEncodedContent(HttpContent contentToBeEncrypted, byte[] key)
-            : this(contentToBeEncrypted, key, null, Aes128GcmEncoding.DEFAULT_RECORD_SIZE)
+            : this(contentToBeEncrypted, key, (byte[])null, Aes128GcmEncoding.DEFAULT_RECORD_SIZE)
         { }
 
         /// <summary>
@@ -46,9 +47,19 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// </summary>
         /// <param name="contentToBeEncrypted">The content which will be encoded.</param>
         /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        public Aes128GcmEncodedContent(HttpContent contentToBeEncrypted, byte[] key, byte[] keyId)
+            : this(contentToBeEncrypted, key, keyId, Aes128GcmEncoding.DEFAULT_RECORD_SIZE)
+        { }
+
+        /// <summary>
+        /// Instantiates a new <see cref="Aes128GcmEncodedContent"/>.
+        /// </summary>
+        /// <param name="contentToBeEncrypted">The content which will be encoded.</param>
+        /// <param name="key">The keying material.</param>
         /// <param name="recordSize">The record size in octets.</param>
         public Aes128GcmEncodedContent(HttpContent contentToBeEncrypted, byte[] key, int recordSize)
-            : this(contentToBeEncrypted, key, null, recordSize)
+            : this(contentToBeEncrypted, key, (byte[])null, recordSize)
         { }
 
         /// <summary>
@@ -59,6 +70,17 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         /// <param name="keyId">The keying material identificator.</param>
         /// <param name="recordSize">The record size in octets.</param>
         public Aes128GcmEncodedContent(HttpContent contentToBeEncrypted, byte[] key, string keyId, int recordSize)
+            : this(contentToBeEncrypted, key, Encoding.UTF8.GetBytes(keyId), recordSize)
+        { }
+
+        /// <summary>
+        /// Instantiates a new <see cref="Aes128GcmEncodedContent"/>.
+        /// </summary>
+        /// <param name="contentToBeEncrypted">The content which will be encoded.</param>
+        /// <param name="key">The keying material.</param>
+        /// <param name="keyId">The keying material identificator.</param>
+        /// <param name="recordSize">The record size in octets.</param>
+        public Aes128GcmEncodedContent(HttpContent contentToBeEncrypted, byte[] key, byte[] keyId, int recordSize)
         {
             _contentToBeEncrypted = contentToBeEncrypted;
             _key = key;
