@@ -1,0 +1,309 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Lib.Net.Http.EncryptedContentEncoding
+  name: Lib.Net.Http.EncryptedContentEncoding
+  href: api/Lib.Net.Http.EncryptedContentEncoding.html
+  commentId: N:Lib.Net.Http.EncryptedContentEncoding
+  fullName: Lib.Net.Http.EncryptedContentEncoding
+  nameWithType: Lib.Net.Http.EncryptedContentEncoding
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent
+  name: Aes128GcmDecodedContent
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html
+  commentId: T:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent
+  nameWithType: Aes128GcmDecodedContent
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.#ctor(System.Net.Http.HttpContent,System.Func{System.Byte[],System.Byte[]})
+  name: Aes128GcmDecodedContent(HttpContent, Func<Byte[], Byte[]>)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmDecodedContent__ctor_System_Net_Http_HttpContent_System_Func_System_Byte___System_Byte____
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.#ctor(System.Net.Http.HttpContent,System.Func{System.Byte[],System.Byte[]})
+  name.vb: Aes128GcmDecodedContent(HttpContent, Func(Of Byte(), Byte()))
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.Aes128GcmDecodedContent(System.Net.Http.HttpContent, System.Func<System.Byte[], System.Byte[]>)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.Aes128GcmDecodedContent(System.Net.Http.HttpContent, System.Func(Of System.Byte(), System.Byte()))
+  nameWithType: Aes128GcmDecodedContent.Aes128GcmDecodedContent(HttpContent, Func<Byte[], Byte[]>)
+  nameWithType.vb: Aes128GcmDecodedContent.Aes128GcmDecodedContent(HttpContent, Func(Of Byte(), Byte()))
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.#ctor(System.Net.Http.HttpContent,System.Func{System.String,System.Byte[]})
+  name: Aes128GcmDecodedContent(HttpContent, Func<String, Byte[]>)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmDecodedContent__ctor_System_Net_Http_HttpContent_System_Func_System_String_System_Byte____
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.#ctor(System.Net.Http.HttpContent,System.Func{System.String,System.Byte[]})
+  name.vb: Aes128GcmDecodedContent(HttpContent, Func(Of String, Byte()))
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.Aes128GcmDecodedContent(System.Net.Http.HttpContent, System.Func<System.String, System.Byte[]>)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.Aes128GcmDecodedContent(System.Net.Http.HttpContent, System.Func(Of System.String, System.Byte()))
+  nameWithType: Aes128GcmDecodedContent.Aes128GcmDecodedContent(HttpContent, Func<String, Byte[]>)
+  nameWithType.vb: Aes128GcmDecodedContent.Aes128GcmDecodedContent(HttpContent, Func(Of String, Byte()))
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.#ctor*
+  name: Aes128GcmDecodedContent
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmDecodedContent__ctor_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.#ctor
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.Aes128GcmDecodedContent
+  nameWithType: Aes128GcmDecodedContent.Aes128GcmDecodedContent
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)
+  name: SerializeToStreamAsync(Stream, TransportContext)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmDecodedContent_SerializeToStreamAsync_System_IO_Stream_System_Net_TransportContext_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.SerializeToStreamAsync(System.IO.Stream, System.Net.TransportContext)
+  nameWithType: Aes128GcmDecodedContent.SerializeToStreamAsync(Stream, TransportContext)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.SerializeToStreamAsync*
+  name: SerializeToStreamAsync
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmDecodedContent_SerializeToStreamAsync_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.SerializeToStreamAsync
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.SerializeToStreamAsync
+  nameWithType: Aes128GcmDecodedContent.SerializeToStreamAsync
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.TryComputeLength(System.Int64@)
+  name: TryComputeLength(out Int64)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmDecodedContent_TryComputeLength_System_Int64__
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.TryComputeLength(System.Int64@)
+  name.vb: TryComputeLength(ByRef Int64)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.TryComputeLength(out System.Int64)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.TryComputeLength(ByRef System.Int64)
+  nameWithType: Aes128GcmDecodedContent.TryComputeLength(out Int64)
+  nameWithType.vb: Aes128GcmDecodedContent.TryComputeLength(ByRef Int64)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.TryComputeLength*
+  name: TryComputeLength
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmDecodedContent_TryComputeLength_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.TryComputeLength
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.TryComputeLength
+  nameWithType: Aes128GcmDecodedContent.TryComputeLength
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent
+  name: Aes128GcmEncodedContent
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html
+  commentId: T:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent
+  nameWithType: Aes128GcmEncodedContent
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[])
+  name: Aes128GcmEncodedContent(HttpContent, Byte[])
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent__ctor_System_Net_Http_HttpContent_System_Byte___
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[])
+  name.vb: Aes128GcmEncodedContent(HttpContent, Byte())
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte[])
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte())
+  nameWithType: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte[])
+  nameWithType.vb: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte())
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.Byte[])
+  name: Aes128GcmEncodedContent(HttpContent, Byte[], Byte[])
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent__ctor_System_Net_Http_HttpContent_System_Byte___System_Byte___
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.Byte[])
+  name.vb: Aes128GcmEncodedContent(HttpContent, Byte(), Byte())
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte[], System.Byte[])
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte(), System.Byte())
+  nameWithType: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte[], Byte[])
+  nameWithType.vb: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte(), Byte())
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.Byte[],System.Int32)
+  name: Aes128GcmEncodedContent(HttpContent, Byte[], Byte[], Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent__ctor_System_Net_Http_HttpContent_System_Byte___System_Byte___System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.Byte[],System.Int32)
+  name.vb: Aes128GcmEncodedContent(HttpContent, Byte(), Byte(), Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte[], System.Byte[], System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte(), System.Byte(), System.Int32)
+  nameWithType: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte[], Byte[], Int32)
+  nameWithType.vb: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte(), Byte(), Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.Int32)
+  name: Aes128GcmEncodedContent(HttpContent, Byte[], Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent__ctor_System_Net_Http_HttpContent_System_Byte___System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.Int32)
+  name.vb: Aes128GcmEncodedContent(HttpContent, Byte(), Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte[], System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte(), System.Int32)
+  nameWithType: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte[], Int32)
+  nameWithType.vb: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte(), Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.String)
+  name: Aes128GcmEncodedContent(HttpContent, Byte[], String)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent__ctor_System_Net_Http_HttpContent_System_Byte___System_String_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.String)
+  name.vb: Aes128GcmEncodedContent(HttpContent, Byte(), String)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte[], System.String)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte(), System.String)
+  nameWithType: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte[], String)
+  nameWithType.vb: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte(), String)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.String,System.Int32)
+  name: Aes128GcmEncodedContent(HttpContent, Byte[], String, Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent__ctor_System_Net_Http_HttpContent_System_Byte___System_String_System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor(System.Net.Http.HttpContent,System.Byte[],System.String,System.Int32)
+  name.vb: Aes128GcmEncodedContent(HttpContent, Byte(), String, Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte[], System.String, System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent(System.Net.Http.HttpContent, System.Byte(), System.String, System.Int32)
+  nameWithType: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte[], String, Int32)
+  nameWithType.vb: Aes128GcmEncodedContent.Aes128GcmEncodedContent(HttpContent, Byte(), String, Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor*
+  name: Aes128GcmEncodedContent
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent__ctor_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.#ctor
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.Aes128GcmEncodedContent
+  nameWithType: Aes128GcmEncodedContent.Aes128GcmEncodedContent
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)
+  name: SerializeToStreamAsync(Stream, TransportContext)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent_SerializeToStreamAsync_System_IO_Stream_System_Net_TransportContext_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.SerializeToStreamAsync(System.IO.Stream, System.Net.TransportContext)
+  nameWithType: Aes128GcmEncodedContent.SerializeToStreamAsync(Stream, TransportContext)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.SerializeToStreamAsync*
+  name: SerializeToStreamAsync
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent_SerializeToStreamAsync_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.SerializeToStreamAsync
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.SerializeToStreamAsync
+  nameWithType: Aes128GcmEncodedContent.SerializeToStreamAsync
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.TryComputeLength(System.Int64@)
+  name: TryComputeLength(out Int64)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent_TryComputeLength_System_Int64__
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.TryComputeLength(System.Int64@)
+  name.vb: TryComputeLength(ByRef Int64)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.TryComputeLength(out System.Int64)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.TryComputeLength(ByRef System.Int64)
+  nameWithType: Aes128GcmEncodedContent.TryComputeLength(out Int64)
+  nameWithType.vb: Aes128GcmEncodedContent.TryComputeLength(ByRef Int64)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.TryComputeLength*
+  name: TryComputeLength
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodedContent_TryComputeLength_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.TryComputeLength
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.TryComputeLength
+  nameWithType: Aes128GcmEncodedContent.TryComputeLength
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding
+  name: Aes128GcmEncoding
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html
+  commentId: T:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding
+  nameWithType: Aes128GcmEncoding
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream,System.IO.Stream,System.Func{System.Byte[],System.Byte[]})
+  name: DecodeAsync(Stream, Stream, Func<Byte[], Byte[]>)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_DecodeAsync_System_IO_Stream_System_IO_Stream_System_Func_System_Byte___System_Byte____
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream,System.IO.Stream,System.Func{System.Byte[],System.Byte[]})
+  name.vb: DecodeAsync(Stream, Stream, Func(Of Byte(), Byte()))
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream, System.IO.Stream, System.Func<System.Byte[], System.Byte[]>)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream, System.IO.Stream, System.Func(Of System.Byte(), System.Byte()))
+  nameWithType: Aes128GcmEncoding.DecodeAsync(Stream, Stream, Func<Byte[], Byte[]>)
+  nameWithType.vb: Aes128GcmEncoding.DecodeAsync(Stream, Stream, Func(Of Byte(), Byte()))
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream,System.IO.Stream,System.Func{System.String,System.Byte[]})
+  name: DecodeAsync(Stream, Stream, Func<String, Byte[]>)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_DecodeAsync_System_IO_Stream_System_IO_Stream_System_Func_System_String_System_Byte____
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream,System.IO.Stream,System.Func{System.String,System.Byte[]})
+  name.vb: DecodeAsync(Stream, Stream, Func(Of String, Byte()))
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream, System.IO.Stream, System.Func<System.String, System.Byte[]>)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync(System.IO.Stream, System.IO.Stream, System.Func(Of System.String, System.Byte()))
+  nameWithType: Aes128GcmEncoding.DecodeAsync(Stream, Stream, Func<String, Byte[]>)
+  nameWithType.vb: Aes128GcmEncoding.DecodeAsync(Stream, Stream, Func(Of String, Byte()))
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync*
+  name: DecodeAsync
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_DecodeAsync_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.DecodeAsync
+  nameWithType: Aes128GcmEncoding.DecodeAsync
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[])
+  name: EncodeAsync(Stream, Stream, Byte[])
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[])
+  name.vb: EncodeAsync(Stream, Stream, Byte())
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[])
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte())
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[])
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte())
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[])
+  name: EncodeAsync(Stream, Stream, Byte[], Byte[])
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___System_Byte___
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[])
+  name.vb: EncodeAsync(Stream, Stream, Byte(), Byte())
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[], System.Byte[])
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte(), System.Byte())
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[], Byte[])
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte(), Byte())
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[],System.Byte[],System.Int32)
+  name: EncodeAsync(Stream, Stream, Byte[], Byte[], Byte[], Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___System_Byte___System_Byte___System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[],System.Byte[],System.Int32)
+  name.vb: EncodeAsync(Stream, Stream, Byte(), Byte(), Byte(), Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[], System.Byte[], System.Byte[], System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte(), System.Byte(), System.Byte(), System.Int32)
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[], Byte[], Byte[], Int32)
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte(), Byte(), Byte(), Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[],System.Int32)
+  name: EncodeAsync(Stream, Stream, Byte[], Byte[], Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___System_Byte___System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[],System.Int32)
+  name.vb: EncodeAsync(Stream, Stream, Byte(), Byte(), Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[], System.Byte[], System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte(), System.Byte(), System.Int32)
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[], Byte[], Int32)
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte(), Byte(), Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[],System.String,System.Int32)
+  name: EncodeAsync(Stream, Stream, Byte[], Byte[], String, Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___System_Byte___System_String_System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Byte[],System.String,System.Int32)
+  name.vb: EncodeAsync(Stream, Stream, Byte(), Byte(), String, Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[], System.Byte[], System.String, System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte(), System.Byte(), System.String, System.Int32)
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[], Byte[], String, Int32)
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte(), Byte(), String, Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Int32)
+  name: EncodeAsync(Stream, Stream, Byte[], Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.Int32)
+  name.vb: EncodeAsync(Stream, Stream, Byte(), Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[], System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte(), System.Int32)
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[], Int32)
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte(), Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.String)
+  name: EncodeAsync(Stream, Stream, Byte[], String)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___System_String_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.String)
+  name.vb: EncodeAsync(Stream, Stream, Byte(), String)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[], System.String)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte(), System.String)
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[], String)
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte(), String)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.String,System.Int32)
+  name: EncodeAsync(Stream, Stream, Byte[], String, Int32)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_System_IO_Stream_System_IO_Stream_System_Byte___System_String_System_Int32_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream,System.IO.Stream,System.Byte[],System.String,System.Int32)
+  name.vb: EncodeAsync(Stream, Stream, Byte(), String, Int32)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte[], System.String, System.Int32)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync(System.IO.Stream, System.IO.Stream, System.Byte(), System.String, System.Int32)
+  nameWithType: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte[], String, Int32)
+  nameWithType.vb: Aes128GcmEncoding.EncodeAsync(Stream, Stream, Byte(), String, Int32)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync*
+  name: EncodeAsync
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncoding_EncodeAsync_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.EncodeAsync
+  nameWithType: Aes128GcmEncoding.EncodeAsync
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler
+  name: Aes128GcmEncodingHandler
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html
+  commentId: T:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler
+  nameWithType: Aes128GcmEncodingHandler
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor(System.Func{System.Byte[],System.Byte[]})
+  name: Aes128GcmEncodingHandler(Func<Byte[], Byte[]>)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler__ctor_System_Func_System_Byte___System_Byte____
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor(System.Func{System.Byte[],System.Byte[]})
+  name.vb: Aes128GcmEncodingHandler(Func(Of Byte(), Byte()))
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(System.Func<System.Byte[], System.Byte[]>)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(System.Func(Of System.Byte(), System.Byte()))
+  nameWithType: Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(Func<Byte[], Byte[]>)
+  nameWithType.vb: Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(Func(Of Byte(), Byte()))
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor(System.Func{System.String,System.Byte[]})
+  name: Aes128GcmEncodingHandler(Func<String, Byte[]>)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler__ctor_System_Func_System_String_System_Byte____
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor(System.Func{System.String,System.Byte[]})
+  name.vb: Aes128GcmEncodingHandler(Func(Of String, Byte()))
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(System.Func<System.String, System.Byte[]>)
+  fullName.vb: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(System.Func(Of System.String, System.Byte()))
+  nameWithType: Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(Func<String, Byte[]>)
+  nameWithType.vb: Aes128GcmEncodingHandler.Aes128GcmEncodingHandler(Func(Of String, Byte()))
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor*
+  name: Aes128GcmEncodingHandler
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler__ctor_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.Aes128GcmEncodingHandler
+  nameWithType: Aes128GcmEncodingHandler.Aes128GcmEncodingHandler
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  name: SendAsync(HttpRequestMessage, CancellationToken)
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_
+  commentId: M:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+  nameWithType: Aes128GcmEncodingHandler.SendAsync(HttpRequestMessage, CancellationToken)
+- uid: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync*
+  name: SendAsync
+  href: api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html#Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler_SendAsync_
+  commentId: Overload:Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync
+  fullName: Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync
+  nameWithType: Aes128GcmEncodingHandler.SendAsync

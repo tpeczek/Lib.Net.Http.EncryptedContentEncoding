@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Aes128GcmEncodingHandler
+   | Lib.Net.Http.EncryptedContentEncoding </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Aes128GcmEncodingHandler
+   | Lib.Net.Http.EncryptedContentEncoding ">
+    <meta name="generator" content="docfx 2.29.1.0">
+    
+    <link rel="shortcut icon" href="../resources/ico/favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../resources/svg/logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-12">
+            <article class="content wrap" id="_content" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler">
+  
+  
+  <h1 id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler" class="text-break">Class Aes128GcmEncodingHandler
+  </h1>
+  <div class="markdown level0 summary"><p>The <span class="xref">System.Net.Http.DelegatingHandler</span> which wraps incoming response content in <a class="xref" href="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html">Aes128GcmDecodedContent</a> based on Content-Encoding header value and sets Accept-Encoding header for outgoing request.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">System.Net.Http.HttpMessageHandler</span></div>
+    <div class="level2"><span class="xref">System.Net.Http.DelegatingHandler</span></div>
+    <div class="level3"><span class="xref">Aes128GcmEncodingHandler</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IDisposable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Net.Http.DelegatingHandler.Dispose(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">System.Net.Http.DelegatingHandler.InnerHandler</span>
+    </div>
+    <div>
+      <span class="xref">System.Net.Http.HttpMessageHandler.Dispose()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Lib.Net.Http.EncryptedContentEncoding.html">Lib.Net.Http.EncryptedContentEncoding</a></h6>
+  <h6><strong>Assembly</strong>: Lib.Net.Http.EncryptedContentEncoding.dll</h6>
+  <h5 id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class Aes128GcmEncodingHandler : DelegatingHandler, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <a id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler__ctor_" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor*"></a>
+  <h4 id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler__ctor_System_Func_System_Byte___System_Byte____" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor(System.Func{System.Byte[],System.Byte[]})">Aes128GcmEncodingHandler(Func&lt;Byte[], Byte[]&gt;)</h4>
+  <div class="markdown level1 summary"><p>Instantiates a new <a class="xref" href="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html">Aes128GcmEncodingHandler</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Aes128GcmEncodingHandler(Func&lt;byte[], byte[]&gt; keyProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.Byte</span>[], <span class="xref">System.Byte</span>[]&gt;</td>
+        <td><span class="parametername">keyProvider</span></td>
+        <td><p>The function which is able to provide the keying material based on the keying material identificator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <a id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler__ctor_" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor*"></a>
+  <h4 id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler__ctor_System_Func_System_String_System_Byte____" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.#ctor(System.Func{System.String,System.Byte[]})">Aes128GcmEncodingHandler(Func&lt;String, Byte[]&gt;)</h4>
+  <div class="markdown level1 summary"><p>Instantiates a new <a class="xref" href="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html">Aes128GcmEncodingHandler</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Aes128GcmEncodingHandler(Func&lt;string, byte[]&gt; keyProvider)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Byte</span>[]&gt;</td>
+        <td><span class="parametername">keyProvider</span></td>
+        <td><p>The function which is able to provide the keying material based on the keying material identificator.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <a id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler_SendAsync_" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync*"></a>
+  <h4 id="Lib_Net_Http_EncryptedContentEncoding_Aes128GcmEncodingHandler_SendAsync_System_Net_Http_HttpRequestMessage_System_Threading_CancellationToken_" data-uid="Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">SendAsync(HttpRequestMessage, CancellationToken)</h4>
+  <div class="markdown level1 summary"><p>Sends the request asynchronously.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override Task&lt;HttpResponseMessage&gt; SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Net.Http.HttpRequestMessage</span></td>
+        <td><span class="parametername">request</span></td>
+        <td><p>The request.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Threading.CancellationToken</span></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td><p>The cancelation token.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.Net.Http.HttpResponseMessage</span>&gt;</td>
+        <td><p>The task object representing the asynchronous operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+</article>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2017 - 2018 Tomasz Pęczek
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
