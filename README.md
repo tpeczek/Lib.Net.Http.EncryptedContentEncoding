@@ -11,6 +11,10 @@ Lib.Net.Http.EncryptedContentEncoding is available on [NuGet](https://www.nuget.
 PM>  Install-Package Lib.Net.Http.EncryptedContentEncoding
 ```
 
+## Documentation
+
+The documentation is available [here](https://tpeczek.github.io/Lib.Net.Http.EncryptedContentEncoding/).
+
 ## Implementation Details and Usage Samples
 
 There are blog posts available describing implementation details and showing usage samples:
