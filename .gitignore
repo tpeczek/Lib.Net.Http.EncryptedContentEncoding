@@ -134,6 +134,11 @@ DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
 
+# DocFX generated stuff
+DocFx.Net.Http.EncryptedContentEncoding/log.txt
+DocFx.Net.Http.EncryptedContentEncoding/api/
+DocFx.Net.Http.EncryptedContentEncoding/wwwroot/
+
 # Click-Once directory
 publish/
 
