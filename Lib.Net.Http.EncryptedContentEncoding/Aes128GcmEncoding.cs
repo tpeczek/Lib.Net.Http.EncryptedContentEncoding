@@ -406,7 +406,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         {
             // CEK = FIRST 16 OCTETS OF HMAC-SHA-256(PRK, CEK_INFO)
             KeyParameter key = new KeyParameter(contentEncryptionKeyInfoParameterHash, 0, CONTENT_ENCRYPTION_KEY_LENGTH);
-            GcmBlockCipher aes128GcmCipher = new GcmBlockCipher(new AesFastEngine());
+            GcmBlockCipher aes128GcmCipher = new GcmBlockCipher(new AesEngine());
 
             ulong recordSequenceNumber = 0;
 
@@ -556,7 +556,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         {
             // CEK = FIRST 16 OCTETS OF HMAC-SHA-256(PRK, CEK_INFO)
             KeyParameter key = new KeyParameter(contentEncryptionKeyInfoParameterHash, 0, CONTENT_ENCRYPTION_KEY_LENGTH);
-            GcmBlockCipher aes128GcmCipher = new GcmBlockCipher(new AesFastEngine());
+            GcmBlockCipher aes128GcmCipher = new GcmBlockCipher(new AesEngine());
 
             ulong recordSequenceNumber = 0;
 
