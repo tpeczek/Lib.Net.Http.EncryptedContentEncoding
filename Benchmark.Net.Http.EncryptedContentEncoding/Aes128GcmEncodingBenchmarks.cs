@@ -1,9 +1,9 @@
-﻿using Benchmark.Net.Http.EncryptedContentEncoding.Infrastructure;
-using BenchmarkDotNet.Attributes;
-using Lib.Net.Http.EncryptedContentEncoding;
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using BenchmarkDotNet.Attributes;
+using Lib.Net.Http.EncryptedContentEncoding;
+using Benchmark.Net.Http.EncryptedContentEncoding.Infrastructure;
 
 namespace Benchmark.Net.Http.EncryptedContentEncoding
 {
