@@ -1,16 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.10.12" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.10.14" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Lib.Net.Http.EncryptedContentEncoding\Lib.Net.Http.EncryptedContentEncoding.csproj" />
   </ItemGroup>
-
 </Project>

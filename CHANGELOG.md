@@ -1,3 +1,7 @@
+## Lib.Net.Http.EncryptedContentEncoding 1.3.0
+### Additions and Changes
+- Added support for .NET Standard 2.0
+
 ## Lib.Net.Http.EncryptedContentEncoding 1.2.0
 ### Additions and Changes
 - Performance improvements.
