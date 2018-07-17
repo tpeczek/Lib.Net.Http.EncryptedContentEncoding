@@ -81,6 +81,16 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         }
 
         /// <summary>
+        /// Computes encoded length.
+        /// </summary>
+        /// <param name="sourceLength">The source length.</param>
+        /// <returns>The encoded length.</returns>
+        public static long ComputeEncodedLength(long sourceLength)
+        {
+            return ComputeEncodedLength(sourceLength, 0, DEFAULT_RECORD_SIZE);
+        }
+
+        /// <summary>
         /// Encodes source stream into destionation stream as an asynchronous operation.
         /// </summary>
         /// <param name="source">The source stream.</param>
@@ -107,6 +117,17 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         }
 
         /// <summary>
+        /// Computes encoded length.
+        /// </summary>
+        /// <param name="sourceLength">The source length.</param>
+        /// <param name="keyIdLength">The keying material identificator length.</param>
+        /// <returns>The encoded length.</returns>
+        public static long ComputeEncodedLength(long sourceLength, byte keyIdLength)
+        {
+            return ComputeEncodedLength(sourceLength, keyIdLength, DEFAULT_RECORD_SIZE);
+        }
+
+        /// <summary>
         /// Encodes source stream into destionation stream as an asynchronous operation.
         /// </summary>
         /// <param name="source">The source stream.</param>
@@ -117,6 +138,17 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         public static Task EncodeAsync(Stream source, Stream destination, byte[] key, int recordSize)
         {
             return EncodeAsync(source, destination, null, key, (byte[])null, recordSize);
+        }
+
+        /// <summary>
+        /// Computes encoded length.
+        /// </summary>
+        /// <param name="sourceLength">The source length.</param>
+        /// <param name="recordSize">The records size in octets.</param>
+        /// <returns>The encoded length.</returns>
+        public static long ComputeEncodedLength(long sourceLength, int recordSize)
+        {
+            return ComputeEncodedLength(sourceLength, 0, recordSize);
         }
 
         /// <summary>
@@ -196,6 +228,36 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             await WriteCodingHeaderAsync(destination, codingHeader).ConfigureAwait(false);
 
             await EncryptContentAsync(source, destination, codingHeader.RecordSize, contentEncryptionKeyInfoParameterHash, nonceInfoParameterHash).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Computes encoded length.
+        /// </summary>
+        /// <param name="sourceLength">The source length.</param>
+        /// <param name="keyIdLength">The keying material identificator length.</param>
+        /// <param name="recordSize">The records size in octets.</param>
+        /// <returns>The encoded length.</returns>
+        public static long ComputeEncodedLength(long sourceLength, byte keyIdLength, int recordSize)
+        {
+            long encodedLength = SALT_LENGTH + RECORD_SIZE_LENGTH + KEY_ID_LEN_LENGTH + keyIdLength;
+
+            long sourceRecordSize = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
+
+#if NETSTANDARD1_6
+            long recordsCount = sourceLength / sourceRecordSize;
+            long lastSourceRecordSize = sourceLength - (recordsCount * sourceRecordSize);
+#else
+            long recordsCount = Math.DivRem(sourceLength, sourceRecordSize, out long lastSourceRecordSize);
+#endif
+
+            encodedLength += (recordsCount * recordSize);
+
+            if (lastSourceRecordSize > 0)
+            {
+                encodedLength += lastSourceRecordSize + RECORD_ENCRYPTION_OVERHEAD_SIZE + RECORD_DELIMITER_SIZE;
+            }
+
+            return encodedLength;
         }
 
         /// <summary>

@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Threading.Tasks;
 using Lib.Net.Http.EncryptedContentEncoding.Internals;
 
@@ -16,10 +18,17 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         #region Fields
         private const string _mediaType = "application/octet-stream";
 
+        private static MethodInfo _httpContentTryComputeLengthMethodInfo = typeof(HttpContent).GetTypeInfo().GetDeclaredMethod(nameof(TryComputeLength));
+
+        private delegate bool HttpContentTryComputeLengthDelegate(out long length);
+        private static Type _httpContentTryComputeLengthDelegateType = typeof(HttpContentTryComputeLengthDelegate);
+
         private readonly HttpContent _contentToBeEncrypted;
         private readonly byte[] _key;
         private readonly byte[] _keyId;
         private readonly int _recordSize;
+
+        private long? _length;
         #endregion
 
         #region Constructors
@@ -114,8 +123,25 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         protected override bool TryComputeLength(out long length)
         {
             length = 0;
+            bool hasValidLength = false;
 
-            return false;
+            if (_length.HasValue)
+            {
+                length = _length.Value;
+                hasValidLength = true;
+            }
+            else
+            {
+                HttpContentTryComputeLengthDelegate httpContentTryComputeLengthDelegateInstance = (HttpContentTryComputeLengthDelegate)_httpContentTryComputeLengthMethodInfo.CreateDelegate(_httpContentTryComputeLengthDelegateType, _contentToBeEncrypted);
+
+                if (httpContentTryComputeLengthDelegateInstance(out long sourceLength))
+                {
+                    _length = length = Aes128GcmEncoding.ComputeEncodedLength(sourceLength, (byte)(_keyId?.Length ?? 0), _recordSize);
+                    hasValidLength = true;
+                }
+            }
+
+            return hasValidLength;
         }
         #endregion
     }
