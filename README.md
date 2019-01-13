@@ -30,6 +30,6 @@ My blog and open source projects are result of my passion for software developme
 
 ## Copyright and License
 
-Copyright © 2017 - 2018 Tomasz Pęczek
+Copyright © 2017 - 2019 Tomasz Pęczek
 
 Licensed under the [MIT License](https://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding/blob/master/LICENSE.md)

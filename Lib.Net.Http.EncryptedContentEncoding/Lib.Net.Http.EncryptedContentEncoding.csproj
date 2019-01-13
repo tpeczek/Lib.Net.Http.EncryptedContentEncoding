@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Lib.Net.Http.EncryptedContentEncoding is a library which adds Encrypted Content-Encoding (aes128gcm) support to HttpClient</Description>
-    <Copyright>Copyright © 2017 - 2018 Tomasz Pęczek</Copyright>
+    <Copyright>Copyright © 2017 - 2019 Tomasz Pęczek</Copyright>
     <VersionPrefix>1.4.0</VersionPrefix>
     <Authors>Tomasz Pęczek</Authors>
     <TargetFrameworks>net451;netstandard1.6;netstandard2.0</TargetFrameworks>
