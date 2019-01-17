@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmDecodedContent.html",
-          "hash": "qEf3B+xxQ2gyYE1TzutCFQ=="
+          "hash": "WelI81Q1YwXLx7Ob81SwWQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodedContent.html",
-          "hash": "rWDtGz91HL1h/Yf8qVNzGw=="
+          "hash": "dwV5JQKHhy8unpQ4RYziZA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncoding.html",
-          "hash": "RO2BgLIZihSghA9oNEdpRQ=="
+          "hash": "AtcLrNuFfAThI48xDPTSAg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lib.Net.Http.EncryptedContentEncoding.Aes128GcmEncodingHandler.html",
-          "hash": "NDhyWkZjrNRfa/d64lqqCA=="
+          "hash": "Tg//nktfAlGTQHwW3zSy8Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/Lib.Net.Http.EncryptedContentEncoding.html",
-          "hash": "Jp3dMM9UE8O4O8GueDxkSA=="
+          "hash": "PyX2G1P237c7KrP3NkS3XQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -81,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "ALflwvElDN6SellVXOvndA=="
+          "hash": "GR/hg7zHG68eSBB1/DFFeA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -128,8 +128,7 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Disable incremental build by force rebuild option.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
@@ -138,25 +137,25 @@
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }
     },
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: it's disabled.",
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
         "incrementalPhase": "postProcessing"
       },
       "processors": {}
