@@ -1,3 +1,7 @@
+## Lib.Net.Http.EncryptedContentEncoding 2.0.0
+### Additions and Changes
+- Strong named the assembly
+
 ## Lib.Net.Http.EncryptedContentEncoding 1.4.0
 ### Additions and Changes
 - Added support for computing encoded content length
