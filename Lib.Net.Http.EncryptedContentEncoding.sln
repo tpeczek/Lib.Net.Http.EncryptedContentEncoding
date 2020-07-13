@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib.Net.Http.EncryptedConte
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Net.Http.EncryptedContentEncoding", "test\Test.Net.Http.EncryptedContentEncoding\Test.Net.Http.EncryptedContentEncoding.csproj", "{EA3ACF2E-ADEC-4E59-B777-D76C614D1862}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocFx.Net.Http.EncryptedContentEncoding", "DocFx.Net.Http.EncryptedContentEncoding\DocFx.Net.Http.EncryptedContentEncoding.csproj", "{D0B32771-193A-456A-B655-03A6CDF31EA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocFx.Net.Http.EncryptedContentEncoding", "docs\DocFx.Net.Http.EncryptedContentEncoding\DocFx.Net.Http.EncryptedContentEncoding.csproj", "{D0B32771-193A-456A-B655-03A6CDF31EA3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark.Net.Http.EncryptedContentEncoding", "benchmarks\Benchmark.Net.Http.EncryptedContentEncoding\Benchmark.Net.Http.EncryptedContentEncoding.csproj", "{F010D7B6-81E6-4931-8B0A-56EAF9E92391}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AA8852C3-7E68-4C6F-8F69-2B6FDD81BBA1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "benchmarks", "benchmarks", "{383A9418-B7E7-4B96-B7B1-F965996CEEB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{630C657E-B66E-4D9E-9AAA-5D5EB9D2D905}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4B49C80B-3394-4DF9-8CDC-DBD385CF1E66} = {A0ADB9AA-7595-499D-8580-58A5A3F6A217}
 		{EA3ACF2E-ADEC-4E59-B777-D76C614D1862} = {AA8852C3-7E68-4C6F-8F69-2B6FDD81BBA1}
+		{D0B32771-193A-456A-B655-03A6CDF31EA3} = {630C657E-B66E-4D9E-9AAA-5D5EB9D2D905}
 		{F010D7B6-81E6-4931-8B0A-56EAF9E92391} = {383A9418-B7E7-4B96-B7B1-F965996CEEB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

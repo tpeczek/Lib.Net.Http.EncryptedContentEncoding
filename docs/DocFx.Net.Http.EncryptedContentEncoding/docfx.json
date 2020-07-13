@@ -4,15 +4,15 @@
       "src": [
         {
           "files": [
-            "Lib.Net.Http.EncryptedContentEncoding/Lib.Net.Http.EncryptedContentEncoding.csproj"
+            "src/Lib.Net.Http.EncryptedContentEncoding/Lib.Net.Http.EncryptedContentEncoding.csproj"
           ],
           "exclude": [ "**/bin/**", "**/obj/**" ],
-          "src": ".."
+          "src": "../.."
         }
       ],
       "dest": "api",
       "properties": {
-        "TargetFramework": "netstandard2.0"
+        "TargetFramework": "netstandard2.1"
       }
     }
   ],
