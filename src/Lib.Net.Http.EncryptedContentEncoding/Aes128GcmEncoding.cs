@@ -243,12 +243,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
             long sourceRecordSize = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
 
-#if NETSTANDARD1_6
-            long recordsCount = sourceLength / sourceRecordSize;
-            long lastSourceRecordSize = sourceLength - (recordsCount * sourceRecordSize);
-#else
             long recordsCount = Math.DivRem(sourceLength, sourceRecordSize, out long lastSourceRecordSize);
-#endif
 
             encodedLength += (recordsCount * recordSize);
 
