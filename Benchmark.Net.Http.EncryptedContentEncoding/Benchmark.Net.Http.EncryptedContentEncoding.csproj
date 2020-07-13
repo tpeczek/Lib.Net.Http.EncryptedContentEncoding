@@ -7,6 +7,6 @@
     <PackageReference Include="BenchmarkDotNet" Version="0.10.14" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lib.Net.Http.EncryptedContentEncoding\Lib.Net.Http.EncryptedContentEncoding.csproj" />
+    <ProjectReference Include="..\src\Lib.Net.Http.EncryptedContentEncoding\Lib.Net.Http.EncryptedContentEncoding.csproj" />
   </ItemGroup>
 </Project>
