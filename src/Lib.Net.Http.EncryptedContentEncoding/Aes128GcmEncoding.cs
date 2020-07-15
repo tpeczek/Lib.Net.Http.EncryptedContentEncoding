@@ -4,10 +4,7 @@ using System.Text;
 using System.Buffers;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Crypto.Modes;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Parameters;
+using Lib.Net.Http.EncryptedContentEncoding.Internals;
 
 namespace Lib.Net.Http.EncryptedContentEncoding
 {
@@ -53,16 +50,13 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         private const byte RECORD_DELIMITER = 1;
         private const byte LAST_RECORD_DELIMITER = 2;
 
-        private const int CONTENT_ENCRYPTION_KEY_LENGTH = 16;
-        private const int NONCE_LENGTH = 12;
-
         // CEK_INFO = "Content-Encoding: aes128gcm" || 0x00 || 0x01
         private static readonly byte[] _contentEncryptionKeyInfoParameter = GetInfoParameter("Content-Encoding: aes128gcm");
         
         // NONCE_INFO = "Content-Encoding: nonce" || 0x00 || 0x01
         private static readonly byte[] _nonceInfoParameter = GetInfoParameter("Content-Encoding: nonce");
 
-        private static readonly SecureRandom _secureRandom = new SecureRandom();
+        private static readonly RNGCryptoServiceProvider _secureRandom = new RNGCryptoServiceProvider();
 
         private static readonly ArrayPool<byte> _arrayPool = ArrayPool<byte>.Shared;
         #endregion
@@ -330,42 +324,6 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         {
             return hasher.ComputeHash(value);
         }
-
-        private static byte[] XorNonce(byte[] nonceInfoParameterHash, ulong recordSequenceNumber)
-        {
-            // NONCE = FIRST 12 OCTETS OF HMAC-SHA-256(PRK, NONCE_INFO) XOR SEQ
-            byte[] nonce = new byte[NONCE_LENGTH];
-
-            nonce[0] =  (byte)(nonceInfoParameterHash[0] ^ 0);
-            nonce[1] =  (byte)(nonceInfoParameterHash[1] ^ 0);
-            nonce[2] =  (byte)(nonceInfoParameterHash[2] ^ 0);
-            nonce[3] =  (byte)(nonceInfoParameterHash[3] ^ 0);
-            nonce[4] =  (byte)(nonceInfoParameterHash[4]  ^ (byte)(recordSequenceNumber >> 56));
-            nonce[5] =  (byte)(nonceInfoParameterHash[5]  ^ (byte)(recordSequenceNumber >> 48));
-            nonce[6] =  (byte)(nonceInfoParameterHash[6]  ^ (byte)(recordSequenceNumber >> 40));
-            nonce[7] =  (byte)(nonceInfoParameterHash[7]  ^ (byte)(recordSequenceNumber >> 32));
-            nonce[8] =  (byte)(nonceInfoParameterHash[8]  ^ (byte)(recordSequenceNumber >> 24));
-            nonce[9] =  (byte)(nonceInfoParameterHash[9]  ^ (byte)(recordSequenceNumber >> 16));
-            nonce[10] = (byte)(nonceInfoParameterHash[10] ^ (byte)(recordSequenceNumber >> 8));
-            nonce[11] = (byte)(nonceInfoParameterHash[11] ^ (byte)(recordSequenceNumber));
-
-            return nonce;
-        }
-
-        private static void ConfigureAes128GcmCipher(GcmBlockCipher aes128GcmCipher, bool forEncryption, KeyParameter key, byte[] nonceInfoParameterHash, ulong recordSequenceNumber)
-        {
-            aes128GcmCipher.Reset();
-            AeadParameters aes128GcmParameters = new AeadParameters(key, 128, XorNonce(nonceInfoParameterHash, recordSequenceNumber));
-            aes128GcmCipher.Init(forEncryption, aes128GcmParameters);
-        }
-
-        private static int Aes128GcmCipherProcessBytes(GcmBlockCipher aes128GcmCipher, byte[] bytesToProcess, int bytesToProcessLength, byte[] processedBytesBuffer)
-        {
-            int processBytesCount = aes128GcmCipher.ProcessBytes(bytesToProcess, 0, bytesToProcessLength, processedBytesBuffer, 0);
-            int doFinalBytesCount = aes128GcmCipher.DoFinal(processedBytesBuffer, processBytesCount);
-
-            return processBytesCount + doFinalBytesCount;
-        }
         #endregion
 
         #region Encode Private Methods
@@ -402,7 +360,7 @@ namespace Lib.Net.Http.EncryptedContentEncoding
             if (salt == null)
             {
                 salt = new byte[SALT_LENGTH];
-                _secureRandom.NextBytes(salt, 0, SALT_LENGTH);
+                _secureRandom.GetBytes(salt);
             }
             else if (salt.Length != SALT_LENGTH)
             {
@@ -453,44 +411,42 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
         private static async Task EncryptContentAsync(Stream source, Stream destination, int recordSize, byte[] contentEncryptionKeyInfoParameterHash, byte[] nonceInfoParameterHash)
         {
-            // CEK = FIRST 16 OCTETS OF HMAC-SHA-256(PRK, CEK_INFO)
-            KeyParameter key = new KeyParameter(contentEncryptionKeyInfoParameterHash, 0, CONTENT_ENCRYPTION_KEY_LENGTH);
-            GcmBlockCipher aes128GcmCipher = new GcmBlockCipher(new AesEngine());
-
-            int maxPlainTextLength = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
-            byte[] plainTextBuffer = _arrayPool.Rent(maxPlainTextLength + RECORD_DELIMITER_SIZE);
-            byte[] cipherTextBuffer = _arrayPool.Rent(recordSize);
-
-            try
+            using (Aes128GcmCipher aes128GcmCipher = new Aes128GcmCipher(contentEncryptionKeyInfoParameterHash, nonceInfoParameterHash))
             {
-                int plainTextLength;
-                int? peekedPlainTextByte = null;
+                int maxPlainTextLength = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
+                byte[] plainTextBuffer = _arrayPool.Rent(maxPlainTextLength + RECORD_DELIMITER_SIZE);
+                byte[] cipherTextBuffer = _arrayPool.Rent(recordSize);
 
-                ulong recordSequenceNumber = 0;
-                do
+                try
                 {
-                    plainTextLength = await GetPlainTextAsync(source, plainTextBuffer, maxPlainTextLength, (byte?)peekedPlainTextByte).ConfigureAwait(false);
+                    int plainTextLength;
+                    int? peekedPlainTextByte = null;
 
-                    if (plainTextBuffer[plainTextLength - 1] != LAST_RECORD_DELIMITER)
+                    ulong recordSequenceNumber = 0;
+                    do
                     {
-                        peekedPlainTextByte = source.ReadByte();
-                        if (peekedPlainTextByte == -1)
+                        plainTextLength = await GetPlainTextAsync(source, plainTextBuffer, maxPlainTextLength, (byte?)peekedPlainTextByte).ConfigureAwait(false);
+
+                        if (plainTextBuffer[plainTextLength - 1] != LAST_RECORD_DELIMITER)
                         {
-                            plainTextBuffer[plainTextLength - 1] = LAST_RECORD_DELIMITER;
+                            peekedPlainTextByte = source.ReadByte();
+                            if (peekedPlainTextByte == -1)
+                            {
+                                plainTextBuffer[plainTextLength - 1] = LAST_RECORD_DELIMITER;
+                            }
                         }
+
+                        int cipherTextLength = aes128GcmCipher.Encrypt(plainTextBuffer, plainTextLength, cipherTextBuffer, recordSequenceNumber++);
+
+                        await destination.WriteAsync(cipherTextBuffer, 0, cipherTextLength).ConfigureAwait(false);
                     }
-
-                    ConfigureAes128GcmCipher(aes128GcmCipher, true, key, nonceInfoParameterHash, recordSequenceNumber++);
-                    int cipherTextLength = Aes128GcmCipherProcessBytes(aes128GcmCipher, plainTextBuffer, plainTextLength, cipherTextBuffer);
-
-                    await destination.WriteAsync(cipherTextBuffer, 0, cipherTextLength).ConfigureAwait(false);
+                    while (plainTextBuffer[plainTextLength - 1] != LAST_RECORD_DELIMITER);
                 }
-                while (plainTextBuffer[plainTextLength - 1] != LAST_RECORD_DELIMITER);
-            }
-            finally
-            {
-                _arrayPool.Return(plainTextBuffer, true);
-                _arrayPool.Return(cipherTextBuffer, true);
+                finally
+                {
+                    _arrayPool.Return(plainTextBuffer, true);
+                    _arrayPool.Return(cipherTextBuffer, true);
+                }
             }
         }
         #endregion
@@ -611,44 +567,42 @@ namespace Lib.Net.Http.EncryptedContentEncoding
 
         private static async Task DecryptContentAsync(Stream source, Stream destination, int recordSize, byte[] contentEncryptionKeyInfoParameterHash, byte[] nonceInfoParameterHash)
         {
-            // CEK = FIRST 16 OCTETS OF HMAC-SHA-256(PRK, CEK_INFO)
-            KeyParameter key = new KeyParameter(contentEncryptionKeyInfoParameterHash, 0, CONTENT_ENCRYPTION_KEY_LENGTH);
-            GcmBlockCipher aes128GcmCipher = new GcmBlockCipher(new AesEngine());
-
-            int maxPlainTextLength = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
-            byte[] plainTextBuffer = _arrayPool.Rent(maxPlainTextLength + RECORD_DELIMITER_SIZE);
-            byte[] cipherTextBuffer = _arrayPool.Rent(recordSize);
-
-            try
+            using (Aes128GcmCipher aes128GcmCipher = new Aes128GcmCipher(contentEncryptionKeyInfoParameterHash, nonceInfoParameterHash))
             {
-                int recordDelimiterIndex = 0;
+                int maxPlainTextLength = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
+                byte[] plainTextBuffer = _arrayPool.Rent(maxPlainTextLength + RECORD_DELIMITER_SIZE);
+                byte[] cipherTextBuffer = _arrayPool.Rent(recordSize);
 
-                ulong recordSequenceNumber = 0;
-                do
+                try
                 {
-                    int cipherTextLength = await source.ReadAsync(cipherTextBuffer, 0, recordSize).ConfigureAwait(false);
-                    if (cipherTextLength == 0)
+                    int recordDelimiterIndex = 0;
+
+                    ulong recordSequenceNumber = 0;
+                    do
                     {
-                        ThrowInvalidOrderOrMissingRecordException();
+                        int cipherTextLength = await source.ReadAsync(cipherTextBuffer, 0, recordSize).ConfigureAwait(false);
+                        if (cipherTextLength == 0)
+                        {
+                            ThrowInvalidOrderOrMissingRecordException();
+                        }
+
+                        int plainTextLength = aes128GcmCipher.Decrypt(cipherTextBuffer, cipherTextLength, plainTextBuffer, recordSequenceNumber++);
+                        recordDelimiterIndex = GetRecordDelimiterIndex(plainTextBuffer, plainTextLength, maxPlainTextLength);
+
+                        if ((plainTextBuffer[recordDelimiterIndex] == LAST_RECORD_DELIMITER) && (source.ReadByte() != -1))
+                        {
+                            ThrowInvalidOrderOrMissingRecordException();
+                        }
+
+                        await destination.WriteAsync(plainTextBuffer, 0, recordDelimiterIndex).ConfigureAwait(false);
                     }
-
-                    ConfigureAes128GcmCipher(aes128GcmCipher, false, key, nonceInfoParameterHash, recordSequenceNumber++);
-                    int plainTextLength = Aes128GcmCipherProcessBytes(aes128GcmCipher, cipherTextBuffer, cipherTextLength, plainTextBuffer);
-                    recordDelimiterIndex = GetRecordDelimiterIndex(plainTextBuffer, plainTextLength, maxPlainTextLength);
-
-                    if ((plainTextBuffer[recordDelimiterIndex] == LAST_RECORD_DELIMITER) && (source.ReadByte() != -1))
-                    {
-                        ThrowInvalidOrderOrMissingRecordException();
-                    }
-
-                    await destination.WriteAsync(plainTextBuffer, 0, recordDelimiterIndex).ConfigureAwait(false);
+                    while (plainTextBuffer[recordDelimiterIndex] != LAST_RECORD_DELIMITER);
                 }
-                while (plainTextBuffer[recordDelimiterIndex] != LAST_RECORD_DELIMITER);
-            }
-            finally
-            {
-                _arrayPool.Return(plainTextBuffer, true);
-                _arrayPool.Return(cipherTextBuffer, true);
+                finally
+                {
+                    _arrayPool.Return(plainTextBuffer, true);
+                    _arrayPool.Return(cipherTextBuffer, true);
+                }
             }
         }
         #endregion
