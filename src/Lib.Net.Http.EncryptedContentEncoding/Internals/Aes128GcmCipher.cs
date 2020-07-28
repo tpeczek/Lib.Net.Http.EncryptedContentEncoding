@@ -1,10 +1,65 @@
 ﻿using System;
+#if NETSTANDARD2_1
+using System.Security.Cryptography;
+#else
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
+#endif
+
 
 namespace Lib.Net.Http.EncryptedContentEncoding.Internals
 {
+#if NETSTANDARD2_1
+    internal class Aes128GcmCipher : IDisposable
+    {
+        private readonly AesGcm _aesGcmCipher;
+        private readonly byte[] _contentEncryptionKeyInfoParameterHash;
+        private readonly byte[] _nonceInfoParameterHash;
+
+        public Aes128GcmCipher(byte[] contentEncryptionKeyInfoParameterHash, byte[] nonceInfoParameterHash)
+        {
+            // CEK = FIRST 16 OCTETS OF HMAC-SHA-256(PRK, CEK_INFO)
+            _aesGcmCipher = new AesGcm(contentEncryptionKeyInfoParameterHash.AsSpan().Slice(0, Aes128GcmHelper.CONTENT_ENCRYPTION_KEY_LENGTH));
+            _nonceInfoParameterHash = nonceInfoParameterHash;
+        }
+
+        public int Encrypt(byte[] plainText, int plainTextLength, byte[] cipherTextBuffer, ulong recordSequenceNumber)
+        {
+            Span<byte> cipherTextBufferSpan = cipherTextBuffer.AsSpan();
+
+            _aesGcmCipher.Encrypt(
+                Aes128GcmHelper.XorNonce(_nonceInfoParameterHash, recordSequenceNumber).AsSpan(),
+                plainText.AsSpan().Slice(0, plainTextLength),
+                cipherTextBufferSpan.Slice(0, plainTextLength),
+                cipherTextBufferSpan.Slice(plainTextLength, Aes128GcmHelper.CONTENT_ENCRYPTION_KEY_LENGTH)
+                );
+
+            return plainTextLength + Aes128GcmHelper.CONTENT_ENCRYPTION_KEY_LENGTH;
+        }
+
+        public int Decrypt(byte[] cipherText, int cipherTextLength, byte[] plainTextBuffer, ulong recordSequenceNumber)
+        {
+            int textLength = cipherTextLength - Aes128GcmHelper.CONTENT_ENCRYPTION_KEY_LENGTH;
+
+            Span<byte> cipherTextSpan = cipherText.AsSpan();
+
+            _aesGcmCipher.Decrypt(
+                Aes128GcmHelper.XorNonce(_nonceInfoParameterHash, recordSequenceNumber).AsSpan(),
+                cipherTextSpan.Slice(0, textLength),
+                cipherTextSpan.Slice(textLength, Aes128GcmHelper.CONTENT_ENCRYPTION_KEY_LENGTH),
+                plainTextBuffer.AsSpan().Slice(0, textLength)
+                );
+
+            return textLength;
+        }
+
+        public void Dispose()
+        {
+            _aesGcmCipher.Dispose();
+        }
+    }
+#else
     internal class Aes128GcmCipher : IDisposable
     {
         private readonly KeyParameter _key;
@@ -53,4 +108,5 @@ namespace Lib.Net.Http.EncryptedContentEncoding.Internals
         public void Dispose()
         { }
     }
+#endif
 }
