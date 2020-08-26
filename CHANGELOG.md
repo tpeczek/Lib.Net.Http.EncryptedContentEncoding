@@ -1,3 +1,7 @@
+## Lib.Net.Http.EncryptedContentEncoding 2.1.0
+### Additions and Changes
+- Replaced Bouncy Castle with .NET Core AES GCM implementation
+
 ## Lib.Net.Http.EncryptedContentEncoding 2.0.0
 ### Additions and Changes
 - Strong named the assembly
