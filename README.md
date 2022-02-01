@@ -1,5 +1,6 @@
 # Lib.Net.Http.EncryptedContentEncoding
-[![NuGet version](https://badge.fury.io/nu/Lib.Net.Http.EncryptedContentEncoding.svg)](http://badge.fury.io/nu/Lib.Net.Http.EncryptedContentEncoding)
+[![NuGet Version](https://img.shields.io/nuget/v/Lib.Net.Http.EncryptedContentEncoding?label=Lib.Net.Http.EncryptedContentEncoding&logo=nuget)](https://www.nuget.org/packages/Lib.Net.Http.EncryptedContentEncoding)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Lib.Net.Http.EncryptedContentEncoding?label=⭳)](https://www.nuget.org/packages/Lib.Net.Http.EncryptedContentEncoding)
 
 Lib.Net.Http.EncryptedContentEncoding is a library which adds [Encrypted Content-Encoding (aes128gcm)](https://tools.ietf.org/html/rfc8188) support to HttpClient.
 
@@ -24,12 +25,10 @@ There are blog posts available describing implementation details and showing usa
 
 ## Donating
 
-My blog and open source projects are result of my passion for software development, but they require a fair amount of my personal time. If you got value from any of the content I create, then I would appreciate your support by [buying me a coffee](https://www.buymeacoffee.com/tpeczek).
-
-<a href="https://www.buymeacoffee.com/tpeczek"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;"  target="_blank"></a>
+My blog and open source projects are result of my passion for software development, but they require a fair amount of my personal time. If you got value from any of the content I create, then I would appreciate your support by [sponsoring me](https://github.com/sponsors/tpeczek) (either monthly or one-time).
 
 ## Copyright and License
 
-Copyright © 2017 - 2021 Tomasz Pęczek
+Copyright © 2017 - 2022 Tomasz Pęczek
 
 Licensed under the [MIT License](https://github.com/tpeczek/Lib.Net.Http.EncryptedContentEncoding/blob/master/LICENSE.md)
