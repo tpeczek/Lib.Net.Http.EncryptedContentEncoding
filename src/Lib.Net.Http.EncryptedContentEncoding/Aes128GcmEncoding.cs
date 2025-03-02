@@ -235,15 +235,22 @@ namespace Lib.Net.Http.EncryptedContentEncoding
         {
             long encodedLength = SALT_LENGTH + RECORD_SIZE_LENGTH + KEY_ID_LEN_LENGTH + keyIdLength;
 
-            long sourceRecordSize = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
-
-            long recordsCount = Math.DivRem(sourceLength, sourceRecordSize, out long lastSourceRecordSize);
-
-            encodedLength += (recordsCount * recordSize);
-
-            if (lastSourceRecordSize > 0)
+            if (sourceLength == 0)
             {
-                encodedLength += lastSourceRecordSize + RECORD_ENCRYPTION_OVERHEAD_SIZE + RECORD_DELIMITER_SIZE;
+                encodedLength += RECORD_ENCRYPTION_OVERHEAD_SIZE + RECORD_DELIMITER_SIZE;
+            }
+            else
+            {
+                long sourceRecordSize = recordSize - RECORD_ENCRYPTION_OVERHEAD_SIZE - RECORD_DELIMITER_SIZE;
+
+                long recordsCount = Math.DivRem(sourceLength, sourceRecordSize, out long lastSourceRecordSize);
+
+                encodedLength += (recordsCount * recordSize);
+
+                if (lastSourceRecordSize > 0)
+                {
+                    encodedLength += lastSourceRecordSize + RECORD_ENCRYPTION_OVERHEAD_SIZE + RECORD_DELIMITER_SIZE;
+                }
             }
 
             return encodedLength;

@@ -24,6 +24,7 @@ namespace Test.Net.Http.EncryptedContentEncoding
 
         private const int RECORD_SIZE_4096 = 4096;
 
+        private const int EMPTY_CONTENT_ENCODED_LENGTH = 38;
         private const string WALRUS_CONTENT = "I am the walrus";
         private const int WALRUS_CONTENT_ENCODED_LENGTH = 53;
         private const string WALRUS_CONTENT_ENCODED_AS_SINGLE_RECORD_BASE64 = "I1BsxtFttlv3u/Oo94xnmwAAEAAA+NAVub2qFgBEuQKRapoZu+IxkIva3MEB1PD+ly8Thjg=";
@@ -32,6 +33,21 @@ namespace Test.Net.Http.EncryptedContentEncoding
         #endregion
 
         #region Tests
+        [Fact]
+        public void ComputeEncodedLength_EmptyContentDefaultKeyRecordSize4096_ReturnsCorrectLength()
+        {
+            byte[] contentToEncode = Encoding.UTF8.GetBytes(String.Empty);
+
+            long encodedContentLength;
+            using (MemoryStream source = new MemoryStream(contentToEncode))
+            {
+                encodedContentLength = Aes128GcmEncoding.ComputeEncodedLength(source.Length, 0, RECORD_SIZE_4096);
+            }
+
+            Assert.Equal(EMPTY_CONTENT_ENCODED_LENGTH, encodedContentLength);
+        }
+
+
         [Fact]
         public void ComputeEncodedLength_WalrusContentDefaultKeyRecordSize4096_ReturnsCorrectLength()
         {
