@@ -1,3 +1,7 @@
+## Lib.Net.Http.EncryptedContentEncoding 2.1.1
+### Bug Fixes
+- Fixed computing encoded content length for empty content
+
 ## Lib.Net.Http.EncryptedContentEncoding 2.1.0
 ### Additions and Changes
 - Replaced Bouncy Castle with .NET Core AES GCM implementation
